@@ -1,0 +1,43 @@
+<form action="<%= actionUrl %><%= getPostQueryString(true) %>" method="post">
+  <fieldset>
+    <% if(parentComment){ %>
+      <input type="hidden" name="parentComment" value="<%= parentComment %>">
+    <% } %>
+    <div class="row">
+      <div class="col-8">
+        <div class="form-group row">
+          <label for="author" class="col-sm-3 col-form-label">Author</label>
+          <div class="col-sm-3">
+            <input type="text" maxlength="10" id="editAuthor" name="editAuthor" value="<%= comment.author %>" class="form-control <%= (commentError._id == comment.id && commentError.parentComment == parentComment && commentError.editAuthor)?'is-invalid':'' %>">
+          </div>
+          <label for="password" class="col-sm-3 col-form-label">Password</label>
+          <div class="col-sm-3">
+            <input type="password" id="editPassword" name="editPassword" value="" class="form-control <%= (commentError._id == comment.id && commentError.parentComment == parentComment && commentError.editPassword)?'is-invalid':'' %>">
+          </div>
+        </div>
+        <textarea name="editText" id="editText" rows="2" class="form-control <%= (commentError._id == comment.id && commentError.parentComment == parentComment && commentError.editText)?'is-invalid':'' %>"><%= (commentForm._id == comment.id)?commentForm.form.text:comment.text %></textarea>
+      </div>
+      <div class="col-4">
+        <% if(comment.id) { %>
+          <button type="submit" class="btn btn-primary h-100 mr-2 pl-4 pr-4">Edit</button>
+          <a href="javascript:void(0)" onclick="$('#comment-<%= comment.id %>').removeClass('comment-edit-enabled')">Cancel</a>
+        <% } else if(parentComment) { %>
+          <button type="submit" class="btn btn-primary h-100 mr-2">Add Reply</button>
+          <a href="javascript:void(0)" onclick="$('#comment-<%= parentComment %>').removeClass('comment-reply-enabled')">Cancel</a>
+        <% } else { %>
+          <button type="submit" class="btn btn-primary h-100 mr-2">Add Comment</button>
+        <% } %>
+      </div>
+
+    </div>
+    <% if(commentError._id == comment.id && commentError.parentComment == parentComment && commentError.editText){ %>
+      <span class="invalid-feedback d-block"><%=commentError.editText %></span>
+    <% } else if(commentError._id == comment.id && commentError.parentComment == parentComment && commentError.editAuthor) { %>
+      <span class="invalid-feedback d-block"><%= commentError.editAuthor %></span>
+    <% } else if(commentError._id == comment.id && commentError.parentComment == parentComment && commentError.editPassword) { %>
+      <span class="invalid-feedback d-block"><%= commentError.editPassword %></span>
+    <% } else if((commentError._id == comment.id ) && commentError.parentComment == parentComment&& errors.login) { %>
+      <span class="invalid-feedback d-block"><%= errors.login %></span>
+    <% } %>
+  </fieldset>
+</form>

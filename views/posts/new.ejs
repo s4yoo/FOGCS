@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%- include('../partials/head') %>
+  </head>
+  <body>
+    <%- include('../partials/nav') %>
+
+    <div class="container mb-3">
+
+      <nav aria-label="breadcrumb"> <!-- 1 -->
+        <ol class="breadcrumb p-1 pl-2 pr-2">
+          <li class="breadcrumb-item"><a href="/">Home</a></li>
+          <li class="breadcrumb-item"><a href="/posts">Community</a></li>
+          <li class="breadcrumb-item active" aria-current="page">New Post</li>
+        </ol>
+      </nav>
+
+      <form id = newPostForm action="/posts<%= getPostQueryString() %>" method="post">
+
+        <div class="form-group">
+          <label for="title">Title</label>
+          <input type="text" id="title" name="title" value="" class="form-control <%= (errors.title)?'is-invalid': '' %>">
+          <% if(errors.title){ %>
+            <span class="invalid-feedback"><%= errors.title %></span>
+          <% } %>
+        </div>
+
+        <div class="form-group">
+          <label for="header">Header</label>
+          <select class="form-control" id="header" name="header">
+            <option>ETC</option>
+            <% header.forEach(function (index){ %>
+              <option><%= index.name %></option>
+            <% }); %>
+           </select>
+        </div>
+
+        <div class="form-group">
+          <label for="title">Name</label>
+          <input type="text" maxlength="10" id="name" name="name" class="form-control <%= (errors.name)?'is-invalid':'' %>">
+          <% if(errors.name){ %>
+            <span class="invalid-feedback"><%= errors.name %></span>
+          <% } %>
+        </div>
+
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" name="password" value="" class="form-control  <%= (errors.password)?'is-invalid':'' %>">
+          <% if(errors.password){ %>
+            <span class="invalid-feedback"><%= errors.password %></span>
+          <% } %>
+        </div>
+
+        <div class="form-group">
+          <label for="body">Body</label>
+          <textarea id="body" name="body" rows="5" class="form-control <%= (errors.body)?'is-invalid':'' %>"><%= post.body %></textarea>
+          <% if(errors.body){ %>
+            <span class="invalid-feedback"><%= errors.body %></span>
+          <% } %>
+        </div>
+
+        <div class="form-group">
+          <!--<div class="g-recaptcha" data-siteKey="6Lf_mcYZAAAAALyIq8qFiQQGQlkvW9DO3WWq2LYN"></div>-->
+          <div class="g-recaptcha" data-sitekey="6Lf_mcYZAAAAALyIq8qFiQQGQlkvW9DO3WWq2LYN"></div>
+          <% if(errors.captcha){ %>
+            <span class="invalid-feedback"><%= errors.captcha %></span>
+          <% } %>
+        </div>
+
+        <% if(errors.unhandled){ %>
+          <div class="invalid-feedback d-block">
+            <%= errors.unhandled %>
+          </div>
+        <% } %>
+
+        <div>
+          <a class="btn btn-primary" href="/posts<%= getPostQueryString() %>">Back</a>
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+
+
+      </form>
+
+    </div>
+    <script>
+      grecaptcha.read(function(){
+        grecatcha.execut('6Lf_mcYZAAAAALyIq8qFiQQGQlkvW9DO3WWq2LYN', {action:'validata_captcha'})
+        .then(function(token){
+          document.getElementById('g-recaptcha-response').value = token;
+        });
+      });
+    </script>
+  </body>
+</html>

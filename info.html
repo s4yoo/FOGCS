@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>당신의 컴퓨터는 안녕하신가?</title>
+  <script src="//code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="/socket.io/socket.io.js"></script>
+  <!--<script src="/jquery.cookie.js"></script>-->
+  <script>
+
+  </script>
+</head>
+<body>
+  <div id="header">
+    <!--스타일 바뀌지 않게 변경-->
+    <h1><a href="/">당신의 컴퓨터는 안녕하신가?</a></h1>
+    <hr />
+  </div>
+
+  <div id="menu">
+    <a href="/">GameList</a>
+    <a href="/community">Community</a>
+    <input id="searchbar" />
+    <input id="SearchButton" type="button" value="검색" onclick="" />
+    <hr />
+  </div>
+  <form method="post">
+    <fieldset>
+      <legend><%= name %></legend>
+      <table>
+
+        <tbody>
+        <tr>
+          <td><label>CPU</label></td>
+          <td>
+            <select name="CPU">
+              <% data.forEach(function (item, index){ %>
+                <option value="<%= item.cpu %>"><%= item.cpu %></option>
+              <% }); %>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td><label>GPU</label></td>
+          <td>
+            <select name="GPU">
+              <% data.forEach(function (item, index){ %>
+                <option value="<%= item.gpu %>"><%= item.gpu %></option>
+              <% }); %>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td><label>해상도</label></td>
+          <td>
+            <select name="Resolution">
+              <% data.forEach(function (item, index) { %>
+                <% var check = 0 %>
+                <% if(check == item.resolution) { %>
+                    <!--여기 중복 안나오게 수정해아함-->
+                <% } else { %>
+                  <% check = item.resolution; %>
+                  <option value="<%= item.resolution %>"><%= item.resolution %></option>
+                <% } %>
+              <% }); %>
+            </select>
+          </td>
+        </tr>
+        <tr display: hidden>
+          <td>
+            <% id.forEach(function (item, index) { %>
+              <input type="text" name="Id" value="<%= item.id %>" />
+            <% }); %>
+          </td>
+        </tr>
+        </tbody>
+
+      </table>
+      <input type="submit" />
+    </filedset>
+    <div display: hidden>
+
+    </div>
+  </form>
+</body>
+</html>

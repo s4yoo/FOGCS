@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>당신의 컴퓨터는 안녕하신가?</title>
+  <script src="//code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="/jquery.cookie.js"></script>
+  <script>
+  </script>
+</head>
+<body>
+  <div id="header">
+    <h1><a href="/">당신의 컴퓨터는 안녕하신가?</a></h1>
+    <hr />
+  </div>
+
+  <div id="menu">
+    <a href="/">GameList</a>
+    <a href="/community">Community</a>
+    <hr />
+  </div>
+
+  <div id="content">
+    <table>
+      <thead>
+        <th>No.<%= data.number %></th>
+        <th><%= data.name %></th>
+      </thead>
+      <tbody>
+        <tr>
+          <td><pre><%= data.content %></pre></td>
+        </tr>
+        <tr>
+          <td>추천수</td>
+          <td><input class="LikeButton" type="button" value="<%= data.likeCount %>" onclick="" /></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div>
+    <table id="comment">
+      <tbody>
+      </tbody>
+    </table>
+  </div>
+
+</body>
+</html>

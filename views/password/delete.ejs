@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%- include('../partials/head') %>
+  </head>
+  <body>
+    <%- include('../partials/nav') %>
+
+    <div class="container mb-3">
+
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb p-1 pl-2 pr-2">
+          <li class="breadcrumb-item"><a href="/">Home</a></li>
+          <li class="breadcrumb-item"><a href="/posts">Community</a></li>
+          <li class="breadcrumb-item"><a href="/posts/<%= post.number %>"><%= post.title %></a></li>
+          <li class="breadcrumb-item active" aria-current="page">Delete Post</li>
+        </ol>
+      </nav>
+
+      <form method="post">
+        <div class="form-group row">
+          <label for="username" class="col-sm-3 col-form-label">Title</label>
+          <div class="col-sm-9">
+            <input type="text" id="username" name="username" value="<%= post.title %>" class="form-control" disabled>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label for="password" class="col-sm-3 col-form-label">Password</label>
+          <div class="col-sm-9">
+            <input type="password" id="password" name="password" value="" class="form-control <%= (errors.password)?'is-invalid':'' %>">
+            <% if(errors.password){ %>
+              <span class="invalid-feedback"><%= errors.password %></span>
+            <% } %>
+          </div>
+        </div>
+
+        <% if(errors.login){ %>
+          <div class="invalid-feedback d-block"><%= errors.login %></div>
+        <% } %>
+
+        <div>
+          <a class="btn btn-primary" href="/posts/<%= getPostQueryString() %>">Back</a>
+          <button type='submit' class="btn btn-primary" href="javascript:void(0)" onclick="confirm('Do you want to delete this?')?this.parentElement.submit():history.back();">Delete</a>
+        </div>
+      </form>
+    </div>
+  </body>
+</html>

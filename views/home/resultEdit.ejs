@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%- include('../partials/head') %>
+  </head>
+  <body>
+    <%- include('../partials/nav') %>
+
+    <div class="container mb-3">
+
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb p-1 pl-2 pr-2">
+          <li class="breadcrumb-item"><a href="/">Home</a></li>
+          <li class="breadcrumb-item"><a href="/home/<%= id %>/select"><%= title.name %></a></li>
+          <li class="breadcrumb-item active" aria-current="page">edit</li>
+        </ol>
+      </nav>
+
+      <h2 class="mb-3"><%= title.name %></h2>
+
+      <form action="/home/<%= id %>/resultEdit" enctype="multipart/form-data" method="post" class="d-inline">
+
+        <% var field = Object.keys(data) %>
+        <div class="form-group row">
+          <label for="fieldname" class="col-sm-3 col-form-label">Title</label>
+          <div class="col-sm-9">
+            <input text="text" id="title" name="title" value="<%= title.name %>" class="form-control" disabled>
+            <input display: hidden text="text" id="title" name="title" value="<%= title.name %>">
+          </div>
+
+            <label for="attachment" class="col-sm-3 col-form-label">Video Attachment</label>
+            <div class="col-sm-9">
+              <input type="hidden" id="attachment" name="attachment" value="<%= file ? file.postId : '' %>">
+              <% if(file) { %>
+                <div class="input-group mb-3" id="currentAttachment">
+                  <input type="text" class="form-control" value="<%= file.originalFileName %>" readonly />
+                  <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" type="button" onclick="$('#attachment').val('');$('#currentAttachment').hide();$('#newAttachment').removeClass('d-none');">Delete</button>
+                  </div>
+                </div>
+                <% } %>
+                <input type="file" id="newAttachment" class="form-control-file <%= file?'d-none':'' %>" name="newAttachment" id="newAttachment">
+              </div>
+
+          <% field.forEach(function(field, index) { %>
+            <% if(field !='gnumber' || field != 'numId') { %>
+              <label for="fieldname" class="col-sm-3 col-form-label"><%= fieldName[field] %></label>
+            <% } %>
+            <div class="col-sm-9">
+              <% if (field == 'resolution'){ %>
+                <input display: hidden type="text" id="<%= field %>" name="<%= field %>" value="<%= data[field] %>">
+                <input type="text" id="<%= field %>" name="<%= field %>" value="<%= data[field] %>" class="form-control" disabled>
+              <% } else if(field == 'gnumber' || field == 'numId') { %>
+                <input type="text" id="<%= field %>" name="<%= field %>" value="<%= data[field] %>" class="form-control" readonly>
+              <% }else if(field == 'S144hz') { %>
+                <select class="form-control" name="<%= field %>">
+                  <option>True</option>
+                  <option>False</option>
+                </select>
+              <% } else { %>
+                <input type="text" id="<%= field %>" name="<%= field %>" value="<%= data[field] %>" class="form-control">
+              <% } %>
+            </div>
+          <% }); %>
+
+          <% if(errors.attachment){ %>
+            <div class="invalid-feedback d-block"><%= errors.attachment %></div>
+          <% } %>
+        </div>
+        <a class="btn btn-primary" href="/home/<%= data.numId %>/fieldAdd %>">Field Add</a>
+        <button type='submit' class="btn btn-primary">Submit</button>
+      </form>
+    </div>
+  </body>
+</html>

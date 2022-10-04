@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%- include('../partials/head') %>
+  </head>
+  <body>
+    <%- include('../partials/nav') %>
+
+    <div class="container mb-3">
+
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb p-1 pl-2 pr-2">
+          <li class="breadcrumb-item"><a href="/">Home</a></li>
+          <li class="breadcrumb-item active" aria-current="page"><%= title.name %></li>
+        </ol>
+      </nav>
+
+      <form action="/home/<%= title.id %>/result" method="post">
+
+        <h2 class="mb-3"><%= title.name %></h2>
+
+        <div class="form-group">
+          <label for="cpu">CPU</label>
+          <select class="form-control" name="cpu">
+            <% if(cpu == null || cpu.length == 0){ %>
+              <option>No data</option>
+            <% } %>
+            <% cpu.forEach(function (cpu, index){ %>
+              <option><%= cpu.cpu %></option>
+            <% }); %>
+  	       </select>
+        </div>
+
+
+        <div class="form-group">
+          <label for="gpu">GPU</label>
+          <select class="form-control" name="gpu">
+            <% if(gpu == null || gpu.length == 0){ %>
+              <option>No data</option>
+            <% } %>
+            <% gpu.forEach(function (gpu, index){ %>
+              <option><%= gpu.gpu %></option>
+            <% }); %>
+  	       </select>
+        </div>
+
+        <div class="form-group">
+          <label for="resolution">Resolution</label>
+          <select class="form-control" name="resolution">
+            <% if(resolution == null || resolution.length == 0){ %>
+              <option>No data</option>
+            <% } %>
+            <% resolution.forEach(function (resolution, index){ %>
+              <option><%= resolution.resolution %></option>
+            <% }); %>
+  	       </select>
+        </div>
+
+        <div>
+          <a class="btn btn-primary" href="/">Back</a>
+          <% if(isAuthenticated) { %>
+            <a class="btn btn-primary" href="/home/<%= title.id %>/add">Add</a>
+          <% } %>
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+
+      </form>
+
+    </div>
+    </body>
+    </html>

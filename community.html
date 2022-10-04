@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>당신의 컴퓨터는 안녕하신가?</title>
+  <script src="//code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="/jquery.cookie.js"></script>
+  <script>
+  </script>
+</head>
+<body>
+  <div id="header">
+    <h1><a href="/">당신의 컴퓨터는 안녕하신가?</a></h1>
+    <hr />
+  </div>
+
+  <div id="menu">
+    <a href="/">GameList</a>
+    <a href="/community">Community</a>
+    <hr />
+  </div>
+  <!--수정, 삭제, 글쓰기 추가할 것-->
+  <div id="containter">
+    <table id="NameList" style="width:800px; height:100px; margin:0 auto; border-collapse:collapse;">
+      <col width="10%" />
+      <col width="70%" />
+      <col width="10%" />
+      <col width="5%" />
+      <col width="5%" />
+      <thead>
+        <th style="height:30px; line-height:30px; border:1px solid #d0d0d0; background-color:#eeeeee;">No.</th>
+        <th style="height:30px; line-height:30px; border:1px solid #d0d0d0; background-color:#eeeeee;">제목</th>
+        <th style="height:30px; line-height:30px; border:1px solid #d0d0d0; background-color:#eeeeee;">추천수</th>
+        <th style="height:30px; line-height:30px; border:1px solid #d0d0d0; background-color:#eeeeee;">edit</th>
+        <th style="height:30px; line-height:30px; border:1px solid #d0d0d0; background-color:#eeeeee;">del</th>
+      </thead>
+      <% data.forEach(function (item, index){ %>
+        <tbody>
+          <td><%= item.number %></td>
+          <td><a href="/community/<%= item.number %>"><%= item.name %></a></td>
+          <td><%= item.likeCount %></td>
+          <td><a href="/EditPW/<%= item.number %>">edit</a></td>
+          <td><a href="/DeletePW/<%= item.number %>">delete</a></td>
+        </tbody>
+      <% }); %>
+    </table>
+  </div>
+</body>
+</html>

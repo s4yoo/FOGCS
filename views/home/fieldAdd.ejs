@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%- include('../partials/head') %>
+  </head>
+  <body>
+    <%- include('../partials/nav') %>
+
+    <div class="container mb-3">
+
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb p-1 pl-2 pr-2">
+          <li class="breadcrumb-item"><a href="/">Home</a></li>
+          <li class="breadcrumb-item"><a href="/home/<%= id %>/select"><%= title.name %></a></li>
+          <li class="breadcrumb-item"><a href="/home/<%= id %>/resultEdit">Result Edit</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Field Add</li>
+        </ol>
+      </nav>
+
+      <h2 class="mb-3"><%= title.name %></h2>
+
+      <form action="/home/<%= id %>/fieldAdd" method="post" class="d-inline">
+        <% var field = Object.keys(data) %>
+        <div class="form-group row">
+          <input type="text" id="addField" name="addField" value="" class="col-sm-3 form-control">
+          <input type="text" id="addFieldName" name="addFieldName" value="" class="col-sm-9 form-control">
+          <% field.forEach(function(field, index) { %>
+            <label for="fieldname" class="col-sm-3 col-form-label"><%= field %></label>
+            <div class="col-sm-9">
+              <input type="text" id="<%= field %>" name="<%= field %>" value="<%= fieldName[field] %>" class="form-control">
+            </div>
+          <% }); %>
+        </div>
+
+        <div>
+          <a class="btn btn-primary" href="/home/<%= id %>/resultEdit">Back</a>
+          <button type='submit' class="btn btn-primary">Submit</button>
+        </div>
+      </form>
+
+    </div>
+  </body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <%- include('../partials/head') %>
+</head>
+<body>
+  <div id="header">
+    <h1>당신의 컴퓨터는 안녕하신가?</h1>
+    <hr />
+  </div>
+
+  <div id="menu">
+    <!--커뮤니티탭, 게임목록 탭, 검색, 작성하기-->
+    <a href="/">GameList</a>
+    <a href="/community">Community</a>
+<!--    <input class="GameListTap" type="button" value="게임목록" onclick="" />
+    <input class="CommunityTap" type="button" value="커뮤니티" onclick="" /> -->
+    <input id="searchbar" />
+    <input class="SearchButton" type="button" value="검색" onclick="" />
+    <hr />
+  </div>
+
+  <div id="containter">
+    <!--여긴 게임목록 나오게 할것-->
+    <table id="Game-list" style="width:800px; height:100px; margin:0 auto; border-collapse:collapse;">
+      <col width="75%" />
+      <col width="25%" />
+      <thead>
+        <th style="height:30px; line-height:30px; border:1px solid #d0d0d0; background-color:#eeeeee;">게임 이름</th>
+        <th style="height:30px; line-height:30px; border:1px solid #d0d0d0; background-color:#eeeeee;">출시일</th>
+      </thead>
+      <% data.forEach(function (item, index){ %>
+      <tbody>
+        <!--게임 이름나오는 곳-->
+        <td><a href="/gameinfo/<%= item.name %>"><%= item.name %></a></td>
+        <td><%= item.date %></td>
+      </tbody>
+      <% }); %>
+  </div>
+</body>
+</html>

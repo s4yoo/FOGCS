@@ -1,0 +1,41 @@
+<form action="<%= actionUrl %><%= getPostQueryString(true) %>" method="post">
+  <fieldset>
+    <% if(parentComment){ %>
+      <input type="hidden" name="parentComment" value="<%= parentComment %>">
+    <% } %>
+    <div class="row">
+      <div class="col-8">
+        <div class="form-group row">
+          <label for="author" class="col-sm-3 col-form-label">Author</label>
+          <div class="col-sm-3">
+            <input type="text" maxlength="10" id="author" name="author" value="<%= comment.author %>" class="form-control <%= (commentError._id == comment.id && commentError.parentComment == parentComment && commentError.author)?'is-invalid':'' %>">
+          </div>
+          <label for="password" class="col-sm-3 col-form-label">Password</label>
+          <div class="col-sm-3">
+            <input type="password" id="password" name="password" value="" class="form-control <%= (commentError._id == comment.id && commentError.parentComment == parentComment && commentError.password)?'is-invalid':'' %>">
+          </div>
+        </div>
+        <textarea name="text" id="text" rows="2" class="form-control <%= (commentError._id == comment.id && commentError.parentComment == parentComment && commentError.text)?'is-invalid':'' %>" placeholder="내용을 작성해주세요" onfocus="this.placeholder=''" onblur="placeholder='내용을 작성해주세요'"><%= (commentForm._id == comment.id)?commentForm.form.text:comment.text %></textarea>
+      </div>
+      <div class="col-4">
+        <% if(comment.id) { %>
+          <button type="submit" class="btn btn-primary h-100 mr-2 pl-4 pr-4">Edit</button>
+          <a href="javascript:void(0)" onclick="$('#comment-<%= comment.id %>').removeClass('comment-edit-enabled')">Cancel</a>
+        <% } else if(parentComment) { %>
+          <button type="submit" class="btn btn-primary h-100 mr-2">Add Reply</button>
+          <a href="javascript:void(0)" onclick="$('#comment-<%= parentComment %>').removeClass('comment-reply-enabled')">Cancel</a>
+        <% } else { %>
+          <button type="submit" class="btn btn-primary h-100 mr-2">Add Comment</button>
+        <% } %>
+      </div>
+
+    </div>
+    <% if(commentError._id == post.id && commentError.parentComment == parentComment && commentError.text){ %>
+      <span class="invalid-feedback d-block"><%=commentError.text %></span>
+    <% } else if(commentError._id == post.id && commentError.parentComment == parentComment && commentError.author) { %>
+      <span class="invalid-feedback d-block"><%= commentError.author %></span>
+    <% } else if(commentError._id == post.id && commentError.parentComment == parentComment && commentError.password) { %>
+      <span class="invalid-feedback d-block"><%= commentError.password %></span>
+    <% } %>
+  </fieldset>
+</form>

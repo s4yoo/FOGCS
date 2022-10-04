@@ -1,0 +1,74 @@
+body {
+  font-family: 'Open Sans', sans-serif;
+}
+.navbar {
+  background-image:url('/image/backgroundImage.png');
+	background-repeat:no-repeat;
+  background-size:cover;
+  font-family:"Times New Roman";
+}
+
+h2{
+  font-family: 'Arial';
+}
+.breadcrumb-item {
+  font-size: 0.8em !important;
+}
+.ellipsis{
+  display: block;
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.board-table {
+  table-layout: fixed;
+}
+.board-table .numId,
+.board-table .views{
+  width: 40px;
+  text-align: center;
+}
+.board-table .author,
+.board-table .date {
+  width: 80px;
+  text-align: center;
+}
+.board-table .date {
+  width: 100px;
+}
+
+.post-body,
+.comment-text {
+  white-space: pre-line;
+}
+.post-info{
+  font-size: 0.8em;
+}
+
+.post-index-tool {
+  max-width: 450px;
+}
+
+.post-index-tool input[type='text']{
+  max-width: 130px;
+}
+
+.highlighted {
+  background-color: yellow;
+}
+
+.comment-edit,
+.comment-password,
+.comment-reply,
+.comment-edit-enabled .comment-show{
+  display:none;
+}
+
+
+.comment-edit-enabled .comment-edit,
+.comment-reply-enabled .comment-reply,
+.comment-password-enabled .comment-password{
+  display:inherit;
+}

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>>당신의 컴퓨터는 안녕하신가?</title>
+  <script src="//code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="/jquery.cookie.js"></script>
+  <script>
+
+  </script>
+</head>
+<body>
+  <div id="header">
+    <!--스타일 검은색, 밑줄 삭제-->
+    <h1><a href="/">당신의 컴퓨터는 안녕하신가?</a></h1>
+    <hr />
+  </div>
+
+  <div id="menu">
+    <a href="/">GameList</a>
+    <a href="/community">Community</a>
+    <input id="searchbar" />
+    <input id="SearchButton" type="button" value="검색" onclick="" />
+    <hr />
+  </div>
+
+  <div id="resultField">
+    <!--사진 및 동영상 들어갈 곳 -->
+    <video src="video/<%= name %>_<%= cpu %>_<%= gpu %>.mp4" controls width="1280" height="720">
+      <strong>Your browser does not support the video tag.</strong>
+    </video>
+    <table>
+      <tr>
+        <td>추천 옵션</td>
+      </tr>
+      <tr><!--여기에 추천 옵션들 뜨게할것-->
+        <td><label>144hz방어 유무</label></td>
+        <td>
+          <% if(data.S144hz) { %>
+            <input type='text' value="True" disabled />
+          <% } else { %>
+            <input type='text' value="False" disabled />
+          <% } %>
+        </td>
+      </tr>
+      <tr>
+        <td><label>평균 FPS</label></td>
+        <td><input type='text' value="<%= data.AFPS %>" disabled/></td>
+      </tr>
+    </table>
+  </div>
+</body>
+</html>
